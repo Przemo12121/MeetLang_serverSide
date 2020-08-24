@@ -2,5 +2,4 @@ django
 gunicorn
 django-heroku
 pymongo
-json
 flask
