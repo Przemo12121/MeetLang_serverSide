@@ -92,4 +92,7 @@ def Token():
     else:
         return {"status":"Posted token is invalid."}
 
-app.run()
+
+#heroku implementation requirement
+if (__name__ == "__main__"):
+    app.run()
