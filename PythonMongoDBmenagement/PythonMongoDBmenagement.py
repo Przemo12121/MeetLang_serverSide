@@ -54,7 +54,7 @@ class ClientServerInteractionStatus(Enum):
     Success = 1
 
 
-@app.route('/AddNewUser', methods = ['POST'])
+#@app.route('/AddNewUser', methods = ['POST'])
 def AddNewUser():
     data = request.json
     if(data == None):
@@ -64,7 +64,7 @@ def AddNewUser():
     else:
         return {"Interaction status":str(ClientServerInteractionStatus.Fail.value)}
 
-@app.route('/LoginUser', methods = ['POST'])
+#@app.route('/LoginUser', methods = ['POST'])
 def LoginUser():
     data = request.json
     if(data == None):
@@ -79,7 +79,7 @@ def LoginUser():
         UsersDatabase.update_user(user, user_online)
         return UsersDatabase.return_user_info(user)
 
-@app.route('/AddTags', methods = ['POST'])
+#@app.route('/AddTags', methods = ['POST'])
 def AddTags():
     data = request.json
     if(data == None):
@@ -92,7 +92,7 @@ def AddTags():
         UsersDatabase.update_user_tags(tags, updated_tags)
         return {"Interaction status":str(ClientServerInteractionStatus.Success.value)} 
 
-@app.route('/AddLanguages', methods = ['POST'])
+#@app.route('/AddLanguages', methods = ['POST'])
 def AddLanguages():
     data = request.json
     if(data == None):
