@@ -92,4 +92,4 @@ def Token():
     else:
         return {"status":"Posted token is invalid."}
 
-app.run(port=5000)
+app.run()

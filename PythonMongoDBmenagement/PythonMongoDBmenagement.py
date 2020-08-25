@@ -54,8 +54,6 @@ class ClientServerInteractionStatus(Enum):
     Success = 1
 
 
-app = Flask(__name__)
-
 @app.route('/AddNewUser', methods = ['POST'])
 def AddNewUser():
     data = request.json
