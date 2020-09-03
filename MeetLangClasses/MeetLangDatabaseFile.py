@@ -86,8 +86,8 @@ class AccessTokensDatabase(MeetLangDatabase):
     def FindExistingClientByClientId(clientId):
         return AccessTokensDatabase.clients.find_one({"client_id":clientId})
     @staticmethod
-    def FindExistingClient(clientId, scope):
-        return AccessTokensDatabase.clients.find_one({"client_id":clientId, "scope":scope})
+    def FindExistingClient(clientId, state):
+        return AccessTokensDatabase.clients.find_one({"client_id":clientId, "state":state})
     @staticmethod
     def AddNewActiveToken(clientId, state, codeChallenge, scope):
         AccessTokensDatabase.activeTokens.insert_one({"client_id":clientId,"state":state})
@@ -107,4 +107,3 @@ class AccessTokensDatabase(MeetLangDatabase):
             return True
         else:
             return False
-        
