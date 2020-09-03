@@ -1,1 +1,1 @@
-web: gunicorn IDProvider:app
+web: gunicorn IDprovider:app
