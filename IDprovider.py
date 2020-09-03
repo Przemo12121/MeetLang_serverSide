@@ -23,7 +23,7 @@ def Token():
     token = data['header']
     if(AccessTokensDatabase.FindExistingClient(token['client_id'], token['state']) == None):
         return {"status":"Client not registered."}
-    elif(AccessTokensDatabase.FindActiveToken(token) == None):
+    elif(AccessTokensDatabase.FindActiveToken(token['code']) == None):
          return {"status":"Posted token is inactive."}
     elif(AccessTokensDatabase.IsTokenValid(token)):
         requestType = data['request']
