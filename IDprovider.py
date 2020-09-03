@@ -3,6 +3,12 @@ from flask import Flask, request
 
 app = Flask(__name__)
 
+@app.route('/Register', methods = ['POST'])
+def Register():
+    data = request.json
+    clientId = AccessTokensDatabase.RegisterNewClient(data['state'])
+    return {"client_id":clientId}
+
 @app.route('/Authorize', methods = ['GET'])
 def Authorize():
     clientId = request.args.get('client_id')
