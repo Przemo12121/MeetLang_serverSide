@@ -17,6 +17,8 @@ class UsersDatabase(MeetLangDatabase):
     @staticmethod
     def AddUser(user):
         UsersDatabase.usersCollection.insert_one(user).inserted_id
+        UsersDatabase.usersTagsCollection.insert_one({"email":user['email']})
+        UsersDatabase.usersLanguagesCollection.insert_one({"email":user['email']})
     @staticmethod
     def UpdateUserData(user, newData):
         UsersDatabase.usersCollection.update_one(user, newData)
@@ -46,15 +48,15 @@ class UsersDatabase(MeetLangDatabase):
         for key in data:
             if(key != "_id" and key != "password"):
                 userData[key] = data[key]
-        
+
         userTags = {}
-        data = UsersDatabase.usersTagsCollection.find_one({{"email":userEmail}})
+        data = UsersDatabase.usersTagsCollection.find_one({"email":userEmail})
         for key in data:
             if(key != "_id" and key != "email"):
                 userTags[key] = data[key]
-        
+
         userLanguages = {}
-        data = UsersDatabase.usersLanguagesCollection.find_one({{"email":userEmail}})
+        data = UsersDatabase.usersLanguagesCollection.find_one({"email":userEmail})
         for key in data:
             if(key != "_id" and key != "email"):
                 userLanguages[key] = data[key]
