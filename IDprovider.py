@@ -1,4 +1,5 @@
 from MeetLangClasses.MeetLangDatabaseFile import UsersDatabase, AccessTokensDatabase
+from MeetLangClasses.CommunicationStatus import CommunicationStatus
 from flask import Flask, request
 import json
 
@@ -8,7 +9,7 @@ app = Flask(__name__)
 def Register():
     data = request.json
     clientId = AccessTokensDatabase.RegisterNewClient(data['state'])
-    return {"client_id":clientId}
+    return CommunicationStatus.Success({"client_id":clientId})
 
 @app.route('/Authorize', methods = ['GET'])
 def Authorize():
@@ -20,31 +21,31 @@ def Authorize():
 
         code = AccessTokensDatabase.AddNewActiveToken(clientId, state, codeChallenge, scope)
 
-        return {"code":code}
+        return CommunicationStatus.Success({"code":code})
     else:
-        return {"status":"Client is not registered."}
+        return CommunicationStatus.UnregisteredClient()
 
 @app.route('/Token', methods = ['POST'])
 def Token():
     data = request.json
     token = data['header']
     if(AccessTokensDatabase.FindExistingClient(token['client_id'], token['state']) == None):
-        return {"status":"Client not registered."}
+        return CommunicationStatus.UnregisteredClient()
     elif(AccessTokensDatabase.FindActiveToken(token['code']) == None):
-         return {"status":"Posted token is inactive."}
+        return CommunicationStatus.InactiveToken()
     elif(AccessTokensDatabase.IsTokenValid(token)):
         requestType = data['request']
         if(requestType['type'] == "login"):
             if(UsersDatabase.DoesUserExist(token['scope']) == False):
-                return {"status":"user not found"}
+                return CommunicationStatus.NonExistingUser()
             elif(UsersDatabase.IsPasswordCorrect(token['scope'], requestType['password']) == False):
-                return {"status":"invalid password"}
+                return CommunicationStatus.WrongPassword()
             else:
-                return UsersDatabase.ReturnUserInfo(token['scope'])
+                return CommunicationStatus.Success(UsersDatabase.ReturnUserInfo(token['scope']))
         else:
-            return {"status":"request not yet accessible"}
+            return CommunicationStatus.UndefinedFail()
     else:
-        return {"status":"Posted token is invalid."}
+        return CommunicationStatus.InactiveToken()
 
 
 #heroku implementation requirement
