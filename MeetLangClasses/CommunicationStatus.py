@@ -11,19 +11,19 @@ class StatusEnum(Enum):
 class CommunicationStatus():
     @staticmethod
     def Success(additionalData):
-        return {"status": StatusEnum.Success, **additionalData}
+        return {"status": StatusEnum.Success.value, **additionalData}
     @staticmethod
     def WrongPassword():
-        return {"status": StatusEnum.WrongPassword}
+        return {"status": StatusEnum.WrongPassword.value}
     @staticmethod
     def UnregisteredClient():
-        return {"status": StatusEnum.UnregisteredClient}
+        return {"status": StatusEnum.UnregisteredClient.value}
     @staticmethod
     def InactiveToken():
-        return {"status": StatusEnum.InactiveToken}
+        return {"status": StatusEnum.InactiveToken.value}
     @staticmethod
     def NonExistingUser():
-        return {"status": StatusEnum.NonExistingUser}
+        return {"status": StatusEnum.NonExistingUser.value}
     @staticmethod
     def UndefinedFail():
-        return {"status": StatusEnum.UndefinedFail}
+        return {"status": StatusEnum.UndefinedFail.value}
