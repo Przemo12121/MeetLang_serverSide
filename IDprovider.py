@@ -1,7 +1,7 @@
 from MeetLangClasses.MeetLangDatabaseFile import UsersDatabase, AccessTokensDatabase
 from MeetLangClasses.CommunicationStatus import CommunicationStatus
 from flask import Flask, request
-import json
+import json, os
 
 app = Flask(__name__)
 
@@ -41,6 +41,7 @@ def Token():
             elif(UsersDatabase.IsPasswordCorrect(token['scope'], requestType['password']) == False):
                 return CommunicationStatus.WrongPassword()
             else:
+                key = json.load(open('meetlang-ac968f04f87e.json'))
                 return CommunicationStatus.Success(UsersDatabase.ReturnUserInfo(token['scope']))
         else:
             return CommunicationStatus.UndefinedFail()
