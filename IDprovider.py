@@ -52,7 +52,7 @@ def Token():
 @app.route('/test', methods = ['POST'])
 def test():
     data = request.json
-    token = data['header']
+    token = data['token']
     idinfo = id_token.verify_oauth2_token(token, requests.Request())
     userid = idinfo['sub']
 
@@ -67,5 +67,5 @@ def test():
 
 
 #heroku implementation requirement
-#if (__name__ == "__main__"):
-#    app.run()
+if (__name__ == "__main__"):
+    app.run()
