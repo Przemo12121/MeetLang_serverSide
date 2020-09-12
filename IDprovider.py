@@ -51,6 +51,7 @@ def Token():
 
 @app.route('/test', methods = ['POST'])
 def test():
+    #aas
     data = request.json
     token = data['token']
     idinfo = id_token.verify_oauth2_token(token, requests.Request())
