@@ -51,15 +51,16 @@ def Token():
 
 @app.route('/test', methods = ['POST'])
 def test():
+    pass
     #aas
-    data = request.json
-    token = data['token']
-    idinfo = id_token.verify_oauth2_token(token, requests.Request())
-    userid = idinfo['sub']
+    #data = request.json
+    #token = data['token']
+    #idinfo = id_token.verify_oauth2_token(token, requests.Request())
+    #userid = idinfo['sub']
 
-    print(idinfo)
-    print()
-    print(userid)
+    #print(idinfo)
+    #print()
+    #print(userid)
 
     return {"ASAs":"ASas"}
 
