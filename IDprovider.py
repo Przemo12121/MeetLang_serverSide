@@ -2,9 +2,9 @@ from MeetLangClasses.MeetLangDatabaseFile import UsersDatabase, AccessTokensData
 from MeetLangClasses.CommunicationStatus import CommunicationStatus
 from flask import Flask, request
 import json
-import google
+#import google
 #from google.oauth2 import id_token
-#from google.auth.transport import requests
+from google.auth.transport import requests
 
 app = Flask(__name__)
 
