@@ -2,4 +2,5 @@ gunicorn
 pymongo
 flask
 dnspython
-google
+google.oauth2
+google.auth.transport
