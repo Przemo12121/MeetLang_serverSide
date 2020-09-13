@@ -1,5 +1,7 @@
 gunicorn
 pymongo
 flask
-google
+google-api-python-client
+google-auth
+google-auth-oauthlib
 dnspython
